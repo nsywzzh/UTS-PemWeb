@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasbor Pengelola — {{ data.profile.name }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="min-h-screen pb-12 md:pb-16 text-sm md:text-base">
+    <div class="max-w-5xl mx-auto px-4 md:px-6 py-6 md:py-10 space-y-6 md:space-y-8">
+        <div class="flex items-center justify-between border-b border-white/10 pb-4 md:pb-6 gap-2">
+            <div>
+                <h1 class="text-lg md:text-2xl font-bold text-white">Dasbor Pengelola Portofolio (Full CRUD)</h1>
+                <p class="text-xs md:text-sm text-zinc-400">Penyimpanan persisten menggunakan <code class="text-indigo-400">data.json</code></p>
+            </div>
+            <a href="/" class="px-3 py-1.5 md:px-4 md:py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-white/10 text-xs md:text-sm font-medium text-zinc-200 transition shrink-0">
+                ← Lihat Halaman Publik
+            </a>
+        </div>
+
+        <div class="bento-card p-4 md:p-6 rounded-2xl space-y-3 md:space-y-4">
+            <h2 class="font-semibold text-sm md:text-lg text-white">Ringkasan Data</h2>
+            <div class="grid grid-cols-3 gap-2.5 md:gap-4 text-xs md:text-sm">
+                <div class="p-3 md:p-4 rounded-xl bg-zinc-950 border border-white/5 text-center md:text-left">
+                    <span class="text-zinc-400 block text-[11px] md:text-xs">Total Proyek</span>
+                    <p class="text-lg md:text-2xl font-bold text-indigo-400 mt-0.5 md:mt-1">{{ data.projects | length }}</p>
+                </div>
+                <div class="p-3 md:p-4 rounded-xl bg-zinc-950 border border-white/5 text-center md:text-left">
+                    <span class="text-zinc-400 block text-[11px] md:text-xs">Total Keahlian</span>
+                    <p class="text-lg md:text-2xl font-bold text-emerald-400 mt-0.5 md:mt-1">{{ data.skills | length }}</p>
+                </div>
+                <div class="p-3 md:p-4 rounded-xl bg-zinc-950 border border-white/5 text-center md:text-left">
+                    <span class="text-zinc-400 block text-[11px] md:text-xs">Riwayat Pendidikan</span>
+                    <p class="text-lg md:text-2xl font-bold text-cyan-400 mt-0.5 md:mt-1">{{ data.education | length }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <div class="bento-card p-4 md:p-6 rounded-2xl space-y-3 md:space-y-4">
+                <h2 class="font-semibold text-base md:text-lg text-white">➕ Tambah Proyek Baru (Create)</h2>
+                <form action="/dashboard/project/add" method="POST" class="space-y-3 md:space-y-4 text-xs md:text-sm">
+                    <div>
+                        <label class="block text-[11px] md:text-xs font-medium text-zinc-400 mb-1">Judul Proyek</label>
+                        <input type="text" name="title" required placeholder="Cth: Sistem Manajemen Lab" class="w-full p-2.5 md:p-3 rounded-xl bg-zinc-950 border border-white/10 text-white focus:border-indigo-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] md:text-xs font-medium text-zinc-400 mb-1">Deskripsi Singkat</label>
+                        <textarea name="description" rows="2" required placeholder="Penjelasan singkat aplikasi..." class="w-full p-2.5 md:p-3 rounded-xl bg-zinc-950 border border-white/10 text-white focus:border-indigo-500 focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] md:text-xs font-medium text-zinc-400 mb-1">Teknologi (Pisahkan dengan koma)</label>
+                        <input type="text" name="tech" required placeholder="Python, Flask, SQLite" class="w-full p-2.5 md:p-3 rounded-xl bg-zinc-950 border border-white/10 text-white focus:border-indigo-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] md:text-xs font-medium text-zinc-400 mb-1">Link Repository</label>
+                        <input type="text" name="link" required placeholder="https://github.com/..." class="w-full p-2.5 md:p-3 rounded-xl bg-zinc-950 border border-white/10 text-white focus:border-indigo-500 focus:outline-none">
+                    </div>
+                    <button type="submit" class="w-full py-2.5 md:py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition shadow-lg shadow-indigo-600/20">
+                        Simpan Proyek
+                    </button>
+                </form>
+            </div>
+
+            <div class="bento-card p-4 md:p-6 rounded-2xl space-y-3 md:space-y-4 flex flex-col justify-between">
+                <div>
+                    <h2 class="font-semibold text-base md:text-lg text-white mb-3 md:mb-4">🗑️ Daftar Proyek (Delete)</h2>
+                    <div class="space-y-2.5 md:space-y-3 max-h-72 md:max-h-[380px] overflow-y-auto pr-1">
+                        {% for project in data.projects %}
+                        <div class="flex items-center justify-between p-3 md:p-3.5 rounded-xl bg-zinc-950 border border-white/5 gap-2">
+                            <div class="space-y-0.5 min-w-0">
+                                <p class="font-bold text-white text-xs md:text-sm truncate">{{ project.title }}</p>
+                                <p class="text-[11px] md:text-xs text-zinc-400 truncate">{{ project.tech | join(', ') }}</p>
+                            </div>
+                            <form action="/dashboard/project/delete/{{ project.id }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus proyek ini?')" class="shrink-0">
+                                <button type="submit" class="px-2.5 py-1 md:px-3 md:py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-[11px] md:text-xs font-medium border border-red-500/20 transition">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+            <div class="bento-card p-4 md:p-6 rounded-2xl space-y-3 md:space-y-4">
+                <h2 class="font-semibold text-base md:text-lg text-white">➕ Tambah Keahlian / Skills (Create)</h2>
+                <form action="/dashboard/skill/add" method="POST" class="space-y-3 md:space-y-4 text-xs md:text-sm">
+                    <div>
+                        <label class="block text-[11px] md:text-xs font-medium text-zinc-400 mb-1">Nama Keahlian</label>
+                        <input type="text" name="name" required placeholder="Cth: PostgreSQL" class="w-full p-2.5 md:p-3 rounded-xl bg-zinc-950 border border-white/10 text-white focus:border-indigo-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] md:text-xs font-medium text-zinc-400 mb-1">Kategori</label>
+                        <input type="text" name="category" required placeholder="Cth: Database" class="w-full p-2.5 md:p-3 rounded-xl bg-zinc-950 border border-white/10 text-white focus:border-indigo-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] md:text-xs font-medium text-zinc-400 mb-1">Level Kemahiran</label>
+                        <select name="level" class="w-full p-2.5 md:p-3 rounded-xl bg-zinc-950 border border-white/10 text-white focus:border-indigo-500 focus:outline-none">
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full py-2.5 md:py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition shadow-lg shadow-emerald-600/20">
+                        Simpan Keahlian
+                    </button>
+                </form>
+            </div>
+
+            <div class="bento-card p-4 md:p-6 rounded-2xl space-y-3 md:space-y-4 flex flex-col justify-between">
+                <div>
+                    <h2 class="font-semibold text-base md:text-lg text-white mb-3 md:mb-4">🗑️ Daftar Keahlian (Delete)</h2>
+                    <div class="space-y-2.5 md:space-y-3 max-h-72 md:max-h-[380px] overflow-y-auto pr-1">
+                        {% for skill in data.skills %}
+                        <div class="flex items-center justify-between p-3 md:p-3.5 rounded-xl bg-zinc-950 border border-white/5 gap-2">
+                            <div class="min-w-0">
+                                <p class="font-bold text-white text-xs md:text-sm truncate">{{ skill.name }}</p>
+                                <p class="text-[11px] md:text-xs text-zinc-400">{{ skill.category }} • <span class="text-indigo-400">{{ skill.level }}</span></p>
+                            </div>
+                            <form action="/dashboard/skill/delete" method="POST" onsubmit="return confirm('Yakin ingin menghapus keahlian ini?')" class="shrink-0">
+                                <input type="hidden" name="name" value="{{ skill.name }}">
+                                <button type="submit" class="px-2.5 py-1 md:px-3 md:py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-[11px] md:text-xs font-medium border border-red-500/20 transition">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-card p-4 md:p-6 rounded-2xl space-y-3 md:space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="font-semibold text-sm md:text-lg text-white">Inspektor Raw JSON (`data.json`)</h2>
+                <button id="copy-json-btn" class="text-[11px] md:text-xs px-2.5 py-1 md:px-3 md:py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition">
+                    Salin JSON
+                </button>
+            </div>
+            <pre id="raw-json-content" class="p-3 md:p-4 rounded-xl bg-zinc-950 border border-white/5 text-[11px] md:text-xs text-zinc-300 overflow-x-auto max-h-60 md:max-h-none">{{ data | tojson(indent=2) }}</pre>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

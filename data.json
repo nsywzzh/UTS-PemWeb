@@ -1,0 +1,99 @@
+{
+  "profile": {
+    "name": "Nasywaa Azizah",
+    "role": "Informatics Student",
+    "tagline": "Membangun solusi web modern yang bersih, cepat, dan berorientasi pada pengalaman pengguna.",
+    "avatar": "images/projects/nsywzzh.jpeg",
+    "location": "Yogyakarta, Indonesia",
+    "email": "zvnyaldrick@gmail.com",
+    "github": "https://github.com/nsywzzh",
+    "instagram": "https://instagram.com/nsywzzh._",
+    "availability": "Open for Internship & Freelance"
+  },
+  "skills": [
+    { "name": "Python & Flask", "category": "Backend", "level": "Advanced" },
+    { "name": "HTML5, CSS3 & Tailwind", "category": "Frontend", "level": "Advanced" },
+    { "name": "JavaScript (ES6+)", "category": "Frontend", "level": "Intermediate" },
+    { "name": "UI/UX Design (Figma)", "category": "Design", "level": "Intermediate" },
+    { "name": "Relational Database & JSON", "category": "Database", "level": "Intermediate" },
+    { "name": "Git & GitHub", "category": "Tools", "level": "Advanced" }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "Sistem Pemesanan Ruangan Kampus",
+      "description": "Aplikasi berbasis web untuk manajemen jadwal dan peminjaman fasilitas ruang kuliah dengan validasi konflik waktu otomatis.",
+      "image": "images/projects/kelas.jpeg",
+      "tech": ["Python", "Flask", "SQLite", "Tailwind CSS"],
+      "link": "https://github.com/username/campus-booking"
+    },
+    {
+      "id": 2,
+      "title": "Katalog Produk Olahan Durian",
+      "description": "Website multi-halaman responsif dengan arsitektur template modular Jinja2 untuk menampilkan 12 varian produk olahan lokal.",
+      "image": "images/projects/logo.jpeg",
+      "tech": ["Flask", "Jinja2", "CSS Grid", "JavaScript"],
+      "link": "https://github.com/username/durian-catalog"
+    },
+    {
+      "id": 3,
+      "title": "CLI Kamus Matematika Diskrit",
+      "description": "Aplikasi pencarian istilah dan konsep matematika diskrit berbasis terminal dengan penyimpanan data persisten JSON.",
+      "image": "images/projects/Buku.jpeg",
+      "tech": ["Python", "JSON", "CLI"],
+      "link": "https://github.com/username/discrete-dict"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Dokter Kecil",
+      "company": "Universitas Gadjah Mada",
+      "period": "2016-2017",
+      "description": "Mempelajari prinsip-prinsip dasar kedokteran dan memberikan pelayanan kesehatan dasar."
+    },
+    {
+      "role": "KSM Ilmu Pengetahuan Alam",
+      "company": "Kementrian Agama RI",
+      "period": "2021",
+      "description": "Mengikuti kompetisi IPA sebagai perwakilan dari Madrasah Tsanawiyah."
+    },
+    {
+      "role": "Panitia Maulid Pagi",
+      "company": "Majelis Telaga Kautsar Indonesia",
+      "period": "2026",
+      "description": "Membantu dalam penyelenggaraan kegiatan Maulid Pagi."
+    },
+    {
+      "role": "Magang Kepesantrenan UNU Jogja",
+      "company": "Kepesantrenan UNU Jogja",
+      "period": "2026",
+      "description": "Membantu dalam pengelolaan dan pengembangan program kepesantrenan di universitas."
+    }
+  ],
+  "education": [
+    {
+      "institution": "MI Maulana Maghribi",
+      "degree": "Sekolah Dasar",
+      "period": "2013 – 2019",
+      "highlight": "Mendalami berbagai mata pelajaran dasar dan membangun fondasi akademik yang kuat."
+    },
+    {
+      "institution": "MTs Nurul Ummah Yogyakarta",
+      "degree": "Ilmu Pengetahuan Umum",
+      "period": "2019 – 2022",
+      "highlight": "Mendalami berbagai mata pelajaran umum dan mengembangkan keterampilan akademik."
+    },
+    {
+      "institution": "MA Al-Ma'had An-Nur Bantul",
+      "degree": "IPA",
+      "period": "2022 – 2025",
+      "highlight": "Mendalami ilmu pengetahuan alam dan matematika."
+    },
+    {
+      "institution": "Universitas Nahdlatul Ulama Yogyakarta",
+      "degree": "S1 Informatika",
+      "period": "2025 – Sekarang",
+      "highlight": "Fokus pada Rekayasa Perangkat Lunak, Pengembangan Web, dan Kecerdasan Buatan."
+    }
+  ]
+}
